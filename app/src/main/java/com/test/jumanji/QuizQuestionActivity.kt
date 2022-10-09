@@ -126,6 +126,53 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
                 }
 
             }
+            R.id.btn_submit ->{
+                if(mSelectedOptionPosition == 0){
+                    mCurrentPosition++ //changes to next question
+
+                    when{
+                        mCurrentPosition <= mQuestionsList!!.size ->{
+                            setQuestion()
+                        }
+                    }
+                }else{
+                    val question = mQuestionsList?.get(mCurrentPosition - 1)
+                    if(question!!.correctAns != mSelectedOptionPosition){
+                        answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                    }
+                    answerView(question.correctAns, R.drawable.correct_option_border_bg)
+                }
+            }
+        }
+    }
+
+    private fun answerView(answer: Int, drawableView: Int){
+        when(answer){
+            1-> {
+                tvOptionOne?.background = ContextCompat.getDrawable(
+                    this,
+                    drawableView
+                )
+            }
+            2-> {
+                tvOptionTwo?.background = ContextCompat.getDrawable(
+                    this,
+                    drawableView
+                )
+            }
+            3-> {
+                tvOptionThree?.background = ContextCompat.getDrawable(
+                    this,
+                    drawableView
+                )
+            }
+            4-> {
+                tvOptionFour?.background = ContextCompat.getDrawable(
+                    this,
+                    drawableView
+                )
+            }
+
         }
     }
 
@@ -183,3 +230,6 @@ class QuizQuestionActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 }
+
+
+//Todo check why colours are not changing
